@@ -11,6 +11,8 @@ class Settings:
     DB_PORT: str = os.getenv('DB_PORT')
     DB_PASSWORD: str = os.getenv('DB_PASSWORD')
 
+    SECRET_KEY: str = os.getenv('SECRET_KEY')
+
     @property
     def DATABASE_URL(self) -> str:
         return f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
