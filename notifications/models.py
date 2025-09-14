@@ -2,11 +2,8 @@ from datetime import datetime
 import enum
 
 from sqlalchemy import Column, Integer, ForeignKey, Time, Enum, String, Boolean, DateTime
-from sqlalchemy.orm import DeclarativeBase, relationship
-
-
-class Base(DeclarativeBase):
-    pass
+from sqlalchemy.orm import relationship
+from core.database import Base
 
 
 class NotificationEnum(str, enum.Enum):

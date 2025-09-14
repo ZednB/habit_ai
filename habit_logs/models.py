@@ -2,11 +2,8 @@ import enum
 from datetime import datetime
 
 from sqlalchemy import Column, Integer, ForeignKey, Date, Enum, String, DateTime
-from sqlalchemy.orm import DeclarativeBase, relationship
-
-
-class Base(DeclarativeBase):
-    pass
+from sqlalchemy.orm import relationship
+from core.database import Base
 
 
 class LogStatusEnum(str, enum.Enum):

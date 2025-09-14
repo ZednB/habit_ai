@@ -1,11 +1,8 @@
 import enum
 
 from sqlalchemy import Column, Integer, String, ForeignKey, Enum
-from sqlalchemy.orm import DeclarativeBase, relationship
-
-
-class Base(DeclarativeBase):
-    pass
+from sqlalchemy.orm import relationship
+from core.database import Base
 
 
 class FrequencyEnum(str, enum.Enum):
