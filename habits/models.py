@@ -3,6 +3,7 @@ import enum
 from sqlalchemy import Column, Integer, String, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from core.database import Base
+from notifications.models import Notification
 
 
 class FrequencyEnum(str, enum.Enum):
@@ -26,8 +27,8 @@ class Habit(Base):
 
     owner_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     owner = relationship('User', back_populates='habits')
-    log = relationship('HabitLog', back_populates='habits')
-    notifications = relationship('Notifications', back_populates='habits')
+    logs = relationship('HabitLog', back_populates='habits')
+    notifications = relationship('Notification', back_populates='habits')
 
     def __repr__(self):
         return f"<Habit(name='{self.name}', owner='{self.owner}')>"

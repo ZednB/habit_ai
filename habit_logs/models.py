@@ -21,7 +21,7 @@ class HabitLog(Base):
     note = Column(String(length=255))
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    habit = relationship('Habit', back_populates='logs')
+    habits = relationship('Habit', back_populates='logs')
 
     def __repr__(self):
-        return f"<HabitLog(name='{self.note}', habit='{self.habit}')>"
+        return f"<HabitLog(name='{self.note}', habit='{self.habits}')>"

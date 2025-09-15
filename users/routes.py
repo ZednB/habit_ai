@@ -15,7 +15,7 @@ router = APIRouter(
 
 
 @router.get('/', response_model=List[schemas.UserOut])
-def read_users(skip: int = 0, limit: int = 0, db: Session = Depends(get_db)):
+def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     users = services.get_users(db, skip=skip, limit=limit)
     return users
 

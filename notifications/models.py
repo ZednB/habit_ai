@@ -23,8 +23,8 @@ class Notification(Base):
     is_sent = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    habit = relationship('Habit', back_populates='notifications')
+    habits = relationship('Habit', back_populates='notifications')
 
     def __repr__(self):
-        return f"<Notification(message='{self.message}', habit='{self.habit}')>"
+        return f"<Notification(message='{self.message}', habit='{self.habits}')>"
 
