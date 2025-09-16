@@ -13,9 +13,9 @@ class HabitCreate(HabitBase):
 
 
 class HabitUpdate(BaseModel):
-    name: Optional[str]
-    frequency: Optional[str]
-    status: Optional[str]
+    name: Optional[str] = None
+    frequency: Optional[str] = None
+    status: Optional[str] = None
 
 
 class HabitOut(HabitBase):
