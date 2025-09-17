@@ -1,7 +1,7 @@
 import enum
 from datetime import datetime
 
-from sqlalchemy import Column, Integer, ForeignKey, Date, Enum, String, DateTime
+from sqlalchemy import Column, Integer, ForeignKey, Date, Enum, String, DateTime, func
 from sqlalchemy.orm import relationship
 from core.database import Base
 
@@ -16,7 +16,7 @@ class HabitLog(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     habit_id = Column(ForeignKey('habits.id'), nullable=False)
-    date = Column(Date, nullable=False)
+    completed_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     status = Column(Enum(LogStatusEnum), default=LogStatusEnum.not_done, nullable=False)
     note = Column(String(length=255))
     created_at = Column(DateTime, default=datetime.utcnow)
