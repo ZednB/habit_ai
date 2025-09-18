@@ -15,6 +15,7 @@ class User(Base):
     hashed_password = Column(String(length=255), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
     habits = relationship('Habit', back_populates='owner')
+    telegram_chat_id = Column(String, nullable=True)
 
     def __repr__(self):
         return f"<User(username='{self.username}', email='{self.email}')>"

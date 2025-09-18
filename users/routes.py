@@ -63,3 +63,16 @@ def delete_current_user(current_user: models.User = Depends(security.get_current
                         db: Session = Depends(get_db)):
     services.delete_user(db, current_user)
     return current_user
+
+
+@router.post('/link-telegram')
+def link_telegram(email: str, chat_id: str, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(
+        models.User.email == email
+    ).first()
+    if not user:
+        return {'error': 'Пользователь не найден'}
+    user.telegram_chat_id = chat_id
+    db.commit()
+    db.refresh(user)
+    return {'message': 'Телеграм успешно привязан'}
