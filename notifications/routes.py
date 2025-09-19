@@ -41,7 +41,6 @@ def update_notification(habit_id: int,
     return notification
 
 
-
 @router.delete('/delete/{habit_id}/{notification_id}', response_model=schemas.NotificationOut)
 def delete_notification(habit_id: int, notification_id: int, db: Session = Depends(get_db)):
     notification = services.delete_notification(db, notification_id, habit_id)

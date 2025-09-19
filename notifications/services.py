@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from notifications import models, schemas
 
-from notifications.tasks import send_email_task, send_telegram_task
+from notifications import tasks
 
 
 def get_notifications(db: Session, habit_id: int):
@@ -74,20 +74,20 @@ def process_notifications(db: Session):
     :param db:
     :return:
     """
-    now = datetime.now().time()
+    now = datetime.now().replace(second=0, microsecond=0).time()
     notifications = db.query(models.Notification).filter(
         models.Notification.send_time <= now,
-        models.Notification.is_sent is False
+        models.Notification.is_sent == False
     ).all()
     for notif in notifications:
         habit = notif.habits
         user = habit.owner
-        message = f"Напоминание: {habit.title}\n{notif.message}"
+        message = f"Напоминание: {habit.name}\n{notif.message}"
         if notif.channel == models.NotificationEnum.email:
-            send_email_task.delay(user.email, 'Напоминание о привычке', message)
+            tasks.send_email_task.delay(user.email, 'Напоминание о привычке', message)
         elif notif.channel == models.NotificationEnum.telegram:
             if hasattr(user, 'telegram_id'):
-                send_telegram_task.delay(user.telegram_id, message)
+                tasks.send_telegram_task.delay(user.telegram_id, message)
         notif.is_sent = True
         db.commit()
         db.refresh(notif)

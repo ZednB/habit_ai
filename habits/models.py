@@ -3,7 +3,7 @@ import enum
 from sqlalchemy import Column, Integer, String, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from core.database import Base
-from notifications.models import Notification
+# from notifications.models import Notification
 
 
 class FrequencyEnum(str, enum.Enum):

@@ -3,8 +3,8 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 from core.database import Base
-from habits.models import Habit
-from habit_logs.models import HabitLog
+# from habits.models import Habit
+# from habit_logs.models import HabitLog
 
 
 class User(Base):
